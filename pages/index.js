@@ -24,7 +24,7 @@ export default function App() {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
-        zoom={10}
+        zoom={4}
       />
     </LoadScript>
   );
