@@ -86,6 +86,19 @@ export default function App() {
      const closeModal = () => {
       hide(false);
     };
+
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+       
+        setCenter(prevCenter => ({
+          lat: 56.1304,
+          lng: -106.3468   
+        }));
+        setZoom(3.9)
+      }, 10000); // Update every 10 seconds (10000 milliseconds)
+  
+      return () => clearInterval(intervalId);
+    }, []); // Empty dependency array ensures that useEffect runs only once on mount
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyCV2uII8uPr54ILPN4NC4hbjAjxWVuK6gU"
