@@ -7,9 +7,23 @@ import Model from '@/components/modelWindow'
 
 
 const mapContainerStyle = {
-  width: '90%',
+  width: '100%',
   height: '100vh'
 };
+
+const markers = [
+  { position: { lat: 55, lng:-106 }, id: 1 , title:"Saskatchewan province"},
+  { position: { lat: 46.25, lng: -63}, id: 2, title:"Prince Edward Island" },
+  { position: { lat: 50, lng:-85 }, id: 3 , title:"Ontario"},
+  { position: { lat: 45, lng: -63}, id: 4, title:"Nova Scotia" },
+  { position: { lat: 55, lng:-115 }, id: 5 , title:"Alberta"},
+  { position: { lat: 53.72, lng: -127}, id: 6, title:"British Columbia" },
+  { position: { lat: 56, lng:-127.64 }, id: 7 , title:"Manitoba"},
+  { position: { lat: 53.13, lng: -57.66}, id: 8, title:"Newfoundland and Labrador" },
+  { position: { lat: 46.49, lng:-66 }, id: 9 , title:"New Brunswick"},
+  { position: { lat: 53, lng: -70}, id: 10, title:"Quebec" },
+  // Add more markers as needed
+];
 const markerStyle={
   color: 'red',
   fontSize: '20px'}
@@ -63,12 +77,12 @@ export default function App() {
     );
 
     const[show, hide] = useState(false)
-     function handleClick()
-     {
-      console.log("You clicked me")
-      hide(true)
-      console.log(show)
-     }
+    const [selectedMarkerTitle, setSelectedMarkerTitle] = useState("");
+    const handleMarkerClick = (title) => {
+      console.log("Marker clicked");
+      setSelectedMarkerTitle(title);
+      hide(true);
+    };
      const closeModal = () => {
       hide(false);
     };
@@ -85,16 +99,21 @@ export default function App() {
         center={center}
         zoom={4}
         options ={options}>
-       <MarkerF
-       position = {ontario}
-       markerStyle = {markerStyle}
-       icon={{
-        url: "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-1024.png",
-        scaledSize: { width: 100, height: 100 } // Set the width and height directly
-        
-      }}
-      onClick = {handleClick}
-     />
+         {markers.map(marker => (
+          
+          <MarkerF
+          key={marker.id}
+          position={marker.position}
+          onClick={() => handleMarkerClick(marker.title)}
+          icon={{
+           url: "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-1024.png",
+           scaledSize: { width: 100, height: 100 } // Set the width and height directly
+           
+         }}
+          
+        />
+        ))}
+    
        <Circle center ={center} radius={1500000000} 
        options={{
         strokeColor: 'red', // Outline color
@@ -107,11 +126,11 @@ export default function App() {
       </GoogleMap>
        
       {show && (
-          <Model onClose={closeModal}>
-            <h2>Marker Details</h2>
-            <p>Details about the marker...</p>
-          </Model>
-        )}
+        <Model onClose={closeModal}>
+          <h2>{selectedMarkerTitle}</h2>
+          <p>Details about the marker...</p>
+        </Model>
+      )}
         
   
     </LoadScript>
