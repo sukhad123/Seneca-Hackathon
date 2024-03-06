@@ -2,28 +2,21 @@
 import React from "react";
 import { useRouter } from 'next/router';
 import { useEffect,useState, useMemo } from 'react';
-import { GoogleMap, Circle, LoadScript, MarkerF, Polygon } from "@react-google-maps/api";
+import { GoogleMap, CircleF, LoadScript, MarkerF, Polygon } from "@react-google-maps/api";
 import Model from '@/components/modelWindow'
-
+import Markers from '@/datas/markerdata'
+import DenslyPopulated from '@/datas/denslyPopulated'
+import GrowingCities from '@/datas/growingCities'
 
 const mapContainerStyle = {
   width: '100%',
-  height: '100vh'
+  height: '80vh',
+  padding:'10px'
 };
 
-const markers = [
-  { position: { lat: 55, lng:-106 }, id: 1 , title:"Saskatchewan province"},
-  { position: { lat: 46.25, lng: -63}, id: 2, title:"Prince Edward Island" },
-  { position: { lat: 50, lng:-85 }, id: 3 , title:"Ontario"},
-  { position: { lat: 45, lng: -63}, id: 4, title:"Nova Scotia" },
-  { position: { lat: 55, lng:-115 }, id: 5 , title:"Alberta"},
-  { position: { lat: 53.72, lng: -127}, id: 6, title:"British Columbia" },
-  { position: { lat: 56, lng:-127.64 }, id: 7 , title:"Manitoba"},
-  { position: { lat: 53.13, lng: -57.66}, id: 8, title:"Newfoundland and Labrador" },
-  { position: { lat: 46.49, lng:-66 }, id: 9 , title:"New Brunswick"},
-  { position: { lat: 53, lng: -70}, id: 10, title:"Quebec" },
-  // Add more markers as needed
-];
+ 
+
+
 const markerStyle={
   color: 'red',
   fontSize: '20px'}
@@ -78,9 +71,16 @@ export default function App() {
 
     const[show, hide] = useState(false)
     const [selectedMarkerTitle, setSelectedMarkerTitle] = useState("");
-    const handleMarkerClick = (title) => {
+    const[selectedMarkerPopulation, setSelectMarkerPopulation] = useState("");
+    const[zoom, setZoom] = useState(3.9)
+    const [center, setCenter] = useState({ lat: 56.1304, lng: -106.3468 });
+    const handleMarkerClick = (title, population,center) => {
       console.log("Marker clicked");
       setSelectedMarkerTitle(title);
+      setSelectMarkerPopulation(population);
+      setZoom(10);
+       
+      setCenter(center)
       hide(true);
     };
      const closeModal = () => {
@@ -89,7 +89,7 @@ export default function App() {
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyCV2uII8uPr54ILPN4NC4hbjAjxWVuK6gU"
-      //libraries={libraries}
+
       loadingElement={<div>Loading...</div>}
     >
        
@@ -97,20 +97,19 @@ export default function App() {
     
         mapContainerStyle={mapContainerStyle}
         center={center}
-        zoom={4}
+        zoom={zoom}
         options ={options}>
-         {markers.map(marker => (
+         {Markers.map(marker => (
           
           <MarkerF
           key={marker.id}
           position={marker.position}
-          onClick={() => handleMarkerClick(marker.title)}
+          onClick={() => handleMarkerClick(marker.title, marker.population,marker.position)}
           icon={{
            url: "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-1024.png",
-           scaledSize: { width: 100, height: 100 } // Set the width and height directly
+           scaledSize: { width: 30, height: 30} // Set the width and height directly
            
-         }}
-          
+         }} 
         />
         ))}
     
@@ -122,20 +121,41 @@ export default function App() {
         fillColor: 'red', // Fill color
         fillOpacity: 0.35 // Fill opacity
       }}></Circle> */}
-     
+       {Object.keys(DenslyPopulated).map((city) => (
+        <CircleF
+          key={city}
+          center={DenslyPopulated[city].center}
+          radius={Math.sqrt(DenslyPopulated[city].population) * 2000}
+          onClick={() => handleMarkerClick(DenslyPopulated[city].title, DenslyPopulated[city].population,center)}
+          options={{
+            strokeColor: "#FF8080",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF8080",
+            fillOpacity: 0.35,
+          }}
+        />
+      ))}
+     {Object.keys(GrowingCities).map((city) => (
+  <MarkerF
+    key={city}
+    position={GrowingCities[city].center}
+    onClick={() => handleMarkerClick(GrowingCities[city].title, GrowingCities[city].details,GrowingCities[city].center)}
+    icon={{
+      url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+      scaledSize: { width: 40, height: 40 } // Set the width and height directly
+    }}
+  />
+   ))}
+
+   
       </GoogleMap>
        
       {show && (
-        <Model onClose={closeModal}>
-          <h2>{selectedMarkerTitle}</h2>
-          <p>Details about the marker...</p>
+        <Model onClose={closeModal} title = {selectedMarkerTitle} population ={selectedMarkerPopulation}>
         </Model>
       )}
-        
-  
     </LoadScript>
-    
-
     
   );
 }
