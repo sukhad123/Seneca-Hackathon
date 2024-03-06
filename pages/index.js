@@ -114,14 +114,14 @@ export default function App() {
         />
         ))}
     
-       <Circle center ={center} radius={1500000000} 
+       {/* <Circle center ={center} radius={1500000000} 
        options={{
         strokeColor: 'red', // Outline color
         strokeOpacity: 0.8, // Outline opacity
         strokeWeight: 2, // Outline thickness
         fillColor: 'red', // Fill color
         fillOpacity: 0.35 // Fill opacity
-      }}></Circle>
+      }}></Circle> */}
      
       </GoogleMap>
        
