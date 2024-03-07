@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 export default function Form()
 {
     const {register, handleSubmit} = useForm({
@@ -15,7 +15,13 @@ export default function Form()
     function submitForm(data)
     {
         console.log(data)
+        setShowResult(true)
+        setData(data)
     }
+
+     //regarding forms
+     const[data,setData]= useState("");
+     const[showResult, setShowResult] = useState(false)
     return(
         <>
          <h1 className= " text-center p-12  block text-gray-700 text-sm font-bold mb-2 text-2xl" >
@@ -91,6 +97,11 @@ export default function Form()
       </button>
  
         </form>
+        {showResult && (
+        <>
+        ${setData.name}
+        </>
+      )}
         </>
     )
 }

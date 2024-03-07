@@ -2,7 +2,7 @@
 import React from "react";
 import { useRouter } from 'next/router';
 import { useEffect,useState, useMemo } from 'react';
-import { GoogleMap, CircleF, LoadScript, MarkerF, Polygon } from "@react-google-maps/api";
+import { GoogleMap, CircleF, LoadScript, MarkerF } from "@react-google-maps/api";
 import Model from '@/components/modelWindow'
 import Markers from '@/datas/markerdata'
 import Form from '@/components/form.js'
@@ -71,6 +71,8 @@ export default function App() {
       []
     );
 
+
+    //regarding marker maps
     const[show, hide] = useState(false)
     const [selectedMarkerTitle, setSelectedMarkerTitle] = useState("");
     const[selectedMarkerPopulation, setSelectMarkerPopulation] = useState("");
@@ -165,8 +167,6 @@ export default function App() {
     }}
   />
    ))}
-
-   
       </GoogleMap>
        
       {show && (
@@ -174,6 +174,7 @@ export default function App() {
         </Model>
       )}
         <Form/>
+
     </LoadScript>
   
     
