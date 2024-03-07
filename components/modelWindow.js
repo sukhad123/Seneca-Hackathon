@@ -17,6 +17,7 @@ import React from 'react';
 // export default Model;
 
 
+ 
 export default function Model(props) {
   const onClose = props.onClose; // Retrieve onClose from props
   const title = props.title;//get the title
@@ -28,8 +29,8 @@ export default function Model(props) {
         <div className="modal-content">
           <span className="close" onClick={onClose}>&times;</span>
           
-         <p>{title}</p>
-         <p>{population}</p>
+         <p className = "text-indigo-900">{title}</p>
+         <p className = "text-indigo-900">{population}</p>
 
         </div>
       </div>

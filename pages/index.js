@@ -5,8 +5,10 @@ import { useEffect,useState, useMemo } from 'react';
 import { GoogleMap, CircleF, LoadScript, MarkerF, Polygon } from "@react-google-maps/api";
 import Model from '@/components/modelWindow'
 import Markers from '@/datas/markerdata'
+import Form from '@/components/form.js'
 import DenslyPopulated from '@/datas/denslyPopulated'
 import GrowingCities from '@/datas/growingCities'
+
 
 const mapContainerStyle = {
   width: '100%',
@@ -95,7 +97,7 @@ export default function App() {
           lng: -106.3468   
         }));
         setZoom(3.9)
-      }, 10000); // Update every 10 seconds (10000 milliseconds)
+      }, 20000); // Update every 20 seconds (20000 milliseconds)
   
       return () => clearInterval(intervalId);
     }, []); // Empty dependency array ensures that useEffect runs only once on mount
@@ -138,8 +140,8 @@ export default function App() {
         <CircleF
           key={city}
           center={DenslyPopulated[city].center}
-          radius={Math.sqrt(DenslyPopulated[city].population) * 2000}
-          onClick={() => handleMarkerClick(DenslyPopulated[city].title, DenslyPopulated[city].population,center)}
+          radius={Math.sqrt(DenslyPopulated[city].population) * 1000}
+          onClick={() => handleMarkerClick(DenslyPopulated[city].title, DenslyPopulated[city].population,DenslyPopulated[city].center)}
           options={{
             strokeColor: "#FF8080",
             strokeOpacity: 0.8,
@@ -149,6 +151,9 @@ export default function App() {
           }}
         />
       ))}
+       
+
+
      {Object.keys(GrowingCities).map((city) => (
   <MarkerF
     key={city}
@@ -168,7 +173,9 @@ export default function App() {
         <Model onClose={closeModal} title = {selectedMarkerTitle} population ={selectedMarkerPopulation}>
         </Model>
       )}
+        <Form/>
     </LoadScript>
+  
     
   );
 }

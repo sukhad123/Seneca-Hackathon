@@ -5,16 +5,16 @@ const DenslyPopulated = {
       center: { lat: 53.726669, lng:  -127.647621 },
       population: 5750,
     },
-    second: {
-        "title":"New Westminster, B.C.",
-      center: { lat: 49.2057, lng: -122.911110},
-      population: 5052,
-    },
-    third: {
-        "title":"North Vancouver, B.C.",
-      center: { lat: 49.3200, lng: -122.9110 },
-      population: 4913,
-    },
+    // second: {
+    //     "title":"New Westminster, B.C.",
+    //   center: { lat: 49.2057, lng: -122.911110},
+    //   population: 5052,
+    // },
+    // third: {
+    //     "title":"North Vancouver, B.C.",
+    //   center: { lat: 49.3200, lng: -122.9110 },
+    //   population: 4913,
+    // },
     fourth: {
         "title":"Côte-Saint-Luc, Que.",
       center: { lat: 45.4680, lng: -73.6729 },
@@ -31,11 +31,11 @@ const DenslyPopulated = {
       population: 4833,
     },
 
-    seventh: {
-        "title":"Victoria, B.C.",
-      center: { lat: 48.4284, lng: -123.3656},
-      population: 4722,
-    },
+    // seventh: {
+    //     "title":"Victoria, B.C.",
+    //   center: { lat: 48.4284, lng: -123.3656},
+    //   population: 4722,
+    // },
     eight: {
         "title":"Toronto, Ont.",
       center: { lat:43.6532, lng: -79.3832},
