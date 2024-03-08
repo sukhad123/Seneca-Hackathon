@@ -1,33 +1,30 @@
-import React, { useState } from 'react';
+// components/JobList.js
 
-const MapWithMarker = () => {
-  const [showModal, setShowModal] = useState(false);
+import { useEffect, useState } from 'react';
 
-  const handleMarkerClick = () => {
-    setShowModal(true);
-  };
+const JobList = () => {
+    const [jobs, setJobs] = useState([]);
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+                const response = await fetch('/api/jobs');
+                const data = await response.json();
+                setJobs(data);
+                console.log(data)
+            } catch (error) {
+                console.log(error)
+            }
+        };
 
-  return (
-    <div>
-      {/* Your map component with marker */}
-      <div onClick={handleMarkerClick}>Map Content Here</div>
+        fetchJobs();
+    }, []);
 
-      {/* Modal */}
-      {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <h2>Marker Details</h2>
-            <p>Details about the marker...</p>
-          </div>
+    return (
+        <div>
+            {}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
-export default MapWithMarker;
+export default JobList;

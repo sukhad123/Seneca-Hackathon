@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useEffect,useState } from 'react';
+import axios from 'axios';
 export default function Form()
 {
     const {register, handleSubmit} = useForm({
@@ -12,11 +13,19 @@ export default function Form()
             goals:"",
           }
     });
-    function submitForm(data)
+    async function submitForm(data)
     {
-        console.log(data)
+       
         setShowResult(true)
         setData(data)
+        try {
+          const response = await axios.post('/submit-form', data);
+          console.log("Try is working")
+        } catch (error) {
+          console.error(error);
+        }
+
+
     }
 
      //regarding forms
@@ -24,7 +33,7 @@ export default function Form()
      const[showResult, setShowResult] = useState(false)
     return(
         <>
-         <h1 className= " text-center p-12  block text-gray-700 text-sm font-bold mb-2 text-2xl" >
+         <h1 className= " text-center p-12 text-3xl  block text-gray-700 text-sm font-bold mb-2 text-2xl" >
        Want To Get The Insights Of Canada?<br/>
        Fill the survey!
       </h1>

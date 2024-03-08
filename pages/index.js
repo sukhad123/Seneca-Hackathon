@@ -16,9 +16,6 @@ const mapContainerStyle = {
   padding:'10px'
 };
 
- 
-
-
 const markerStyle={
   color: 'red',
   fontSize: '20px'}
