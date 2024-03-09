@@ -9,7 +9,7 @@ export default function Demo() {
     return (
       <>
       <div className = "first">
-        <div className=" lado max-w-sm rounded overflow-hidden shadow-lg">
+        <div className="lado  max-w-sm rounded overflow-hidden shadow-lg">
           <img className="w-full" src=" https://i.pinimg.com/originals/f3/66/3a/f3663ae8ac3c19eb56abfa0998f10437.jpg" alt="Sunset in the mountains" />
           <p className="text-gray-700 text-base">
               Based on the Information Provided <b>Alberta Province</b> will be the best option!
@@ -47,8 +47,8 @@ export default function Demo() {
           
         </div>
         {set && (
-        <div className=" lado max-w-sm rounded overflow-hidden shadow-lg">
-        <img className="w-full" src=" https://i.pinimg.com/originals/f3/66/3a/f3663ae8ac3c19eb56abfa0998f10437.jpg" alt="Sunset in the mountains" />
+        <div className=" lado1  max-w-sm rounded overflow-hidden shadow-lg">
+        <img className="w-full" src=" https://photographyadventures.ca/wp-content/uploads/2020/08/Trillium-park.8sm.jpg" alt="Sunset in the mountains" />
         <p className="text-gray-700 text-base">
            Comparing with <b>Ontario Province</b>
          

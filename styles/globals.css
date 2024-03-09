@@ -11,10 +11,14 @@
   --background-end-rgb: 255, 255, 255;
 }
 .lado{
-  margin:200px
+  margin-top:100px
+}
+.lado1{
+  margin:100px
 }
 .first{
-  display:flex
+  display:flex;
+  padding:100px;
 }
 
  
