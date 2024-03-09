@@ -10,7 +10,12 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
-
+.lado{
+  margin:200px
+}
+.first{
+  display:flex
+}
 
  
 @media (prefers-color-scheme: dark) {
@@ -24,7 +29,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background-color:black
+  background-color:white;
 }
 
 @layer utilities {

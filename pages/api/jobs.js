@@ -5,11 +5,8 @@ import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
     try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        // const html = await response.text();
-        // const root = parse(html);
-
-        // Your scraping logic here
+        const response = await fetch('/submit-post');
+       
         const data = await response.json();
        res.status(200).json(data);
     } catch (error) {

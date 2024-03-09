@@ -1,9 +1,17 @@
 import { useForm } from 'react-hook-form';
 import { useEffect,useState } from 'react';
+import { useRouter } from 'next/router';
+import { useHistory } from 'react-router-dom';
+import { redirect } from 'next/navigation'
+
 import axios from 'axios';
 export default function Form()
 {
-    const {register, handleSubmit} = useForm({
+   //regarding forms
+   const[newData,setData]= useState("");
+   const[showResult, setShowResult] = useState(false)
+   const router = useRouter();
+   const {register, handleSubmit} = useForm({
         defaultValues: {
             name: "",
             education: "",
@@ -15,29 +23,20 @@ export default function Form()
     });
     async function submitForm(data)
     {
-       
-        setShowResult(true)
-        setData(data)
-        try {
-          const response = await axios.post('/submit-form', data);
-          console.log("Try is working")
-        } catch (error) {
-          console.error(error);
-        }
-
-
+        setShowResult(true);
+        setData(data);
+      
+        router.push('/demo')
     }
 
-     //regarding forms
-     const[data,setData]= useState("");
-     const[showResult, setShowResult] = useState(false)
+    
     return(
         <>
          <h1 className= " text-center p-12 text-3xl  block text-gray-700 text-sm font-bold mb-2 text-2xl" >
        Want To Get The Insights Of Canada?<br/>
        Fill the survey!
       </h1>
-        <form className ="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(submitForm)}>
+        <form className ="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"  onSubmit={handleSubmit(submitForm)}>
         <div className="mb-4">
         
       <label className="block text-gray-700 text-sm font-bold mb-2" >
@@ -103,14 +102,8 @@ export default function Form()
 </div>
 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
        Submit
-      </button>
- 
-        </form>
-        {showResult && (
-        <>
-        ${setData.name}
-        </>
-      )}
+      </button> 
+        </form> 
         </>
     )
 }
