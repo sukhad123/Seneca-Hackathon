@@ -1,13 +1,19 @@
 
 import React from "react";
+
 import { useRouter } from 'next/router';
-import { useEffect,useState, useMemo } from 'react';
-import { GoogleMap, CircleF, LoadScript, MarkerF } from "@react-google-maps/api";
+import { useEffect, useState, useMemo, useCallback ,useRef} from 'react';
+import { GoogleMap, CircleF, LoadScript, MarkerF, InfoWindow } from "@react-google-maps/api";
+import mapboxgl from 'mapbox-gl';
 import Model from '@/components/modelWindow'
 import Markers from '@/datas/markerdata'
 import Form from '@/components/form.js'
 import DenslyPopulated from '@/datas/denslyPopulated'
 import GrowingCities from '@/datas/growingCities'
+
+ 
+
+ 
 
 
 const mapContainerStyle = {
@@ -43,23 +49,6 @@ const ontarioCoordinates = [
 
 
 export default function App() {
-
-
-  //This is my code to render form after 5 seconds
-
-    // const router = useRouter();
-  
-    // useEffect(() => {
-    //   const timer = setTimeout(() => {
-    //     // Navigate to the desired page after 20 seconds
-    //     router.push('/form');
-    //   }, 5000); // 20 seconds in milliseconds
-  
-    //   // Clear the timeout to avoid memory leaks
-    //   return () => clearTimeout(timer);
-    // }, [router]);
-  
-
     const options = React.useMemo(
       () => ({
         disableDefaultUI: true,
@@ -70,36 +59,56 @@ export default function App() {
 
 
     //regarding marker maps
-    const[show, hide] = useState(false)
+    const [show, setShow] = useState(false)
+    const [markerCurr, setMarker] = useState("");
     const [selectedMarkerTitle, setSelectedMarkerTitle] = useState("");
     const[selectedMarkerPopulation, setSelectMarkerPopulation] = useState("");
     const[zoom, setZoom] = useState(3.9)
     const [center, setCenter] = useState({ lat: 56.1304, lng: -106.3468 });
-    const handleMarkerClick = (title, population,center) => {
-      console.log("Marker clicked");
-      setSelectedMarkerTitle(title);
-      setSelectMarkerPopulation(population);
-      setZoom(10);
-       
-      setCenter(center)
-      hide(true);
-    };
+    //const handleMarkerClick = (title, population,center) => {
+    //  console.log("Marker clicked");
+    //  setSelectedMarkerTitle(title);
+    //  setSelectMarkerPopulation(population);
+    //  setZoom(10);
+
+    //  setCenter(center)
+    //  hide(true);
+    //};
+
+
+
+
+    //Marker Info
+    const [showMarkerDetails, setShowMarkerDetails] = useState(false);
+    const handleMarkerClick = (title,center,marker) => {
+        setSelectedMarkerTitle(title);
+        setShowMarkerDetails(true);
+        setCenter(center);
+        setMarker(marker)
+        setShow(true);
+        setZoom(10)
+    }
      const closeModal = () => {
       hide(false);
     };
 
-    useEffect(() => {
-      const intervalId = setInterval(() => {
-       
-        setCenter(prevCenter => ({
-          lat: 56.1304,
-          lng: -106.3468   
-        }));
-        setZoom(3.9)
-      }, 20000); // Update every 20 seconds (20000 milliseconds)
+    //useEffect(() => {
+    //  const intervalId = setInterval(() => {
+
+    //    setCenter(prevCenter => ({
+    //      lat: 56.1304,
+    //      lng: -106.3468
+    //    }));
+    //    setZoom(3.9)
+    //  }, 20000); // Update every 20 seconds (20000 milliseconds)
+
+    //  return () => clearInterval(intervalId);
+    //}, []); // Empty dependency array ensures that useEffect runs only once on mount
+
+
+    //togglepopup
   
-      return () => clearInterval(intervalId);
-    }, []); // Empty dependency array ensures that useEffect runs only once on mount
+
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyCV2uII8uPr54ILPN4NC4hbjAjxWVuK6gU"
@@ -116,15 +125,31 @@ export default function App() {
          {Markers.map(marker => (
           
           <MarkerF
-          key={marker.id}
-          position={marker.position}
-          onClick={() => handleMarkerClick(marker.title, marker.population,marker.position)}
+                 key={marker.id}
+                 position={marker.position}
+                 /*onClick={() => handleMarkerClick(marker.title, marker.population,marker.position)}*/
+                 onClick={()=>handleMarkerClick(marker.title,marker.position,marker)}
+                
           icon={{
            url: "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-1024.png",
            scaledSize: { width: 30, height: 30} // Set the width and height directly
            
          }} 
-        />
+             >
+                 {show &&
+
+                     <InfoWindow
+                         marker={markerCurr}
+                        // visible={showMarkerDetails}
+                         position={center}
+                     >
+
+                         <p className="text">{selectedMarkerTitle}</p>
+
+                     </InfoWindow>
+                 }
+             </MarkerF>
+
         ))}
     
        {/* <Circle center ={center} radius={1500000000} 

@@ -30,7 +30,7 @@ export default function Model(props) {
           <span className="close" onClick={onClose}>&times;</span>
           
          <p className = "text-indigo-900">{title}</p>
-         <p className = "text-indigo-900">{population}</p>
+         <p className = "text-indigo-900">Population Density: {population}</p>
 
         </div>
       </div>
