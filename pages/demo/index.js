@@ -27,21 +27,26 @@ export default function Demo() {
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
             
-            <p className="text-gray-700 text-base">
+                        <p className="  text-gray-700 text-base italic">
                             The average cost of living in Edmonton, Alberta is <strong>$2000 </strong>per month. 
                         </p>
 
 
-            <p className="text-gray-700 text-base">
+                        <p className=" border-solid border-2 border-green-300 text-gray-700 text-base italic">
                             The probability of getting job is <strong>80</strong> percentage.<br/>
                             According to the datasets for the number of jobs available and applicants applying!
             </p>
-            <p className="text-gray-700 text-base">
+                        <p className="text-gray-700 text-base italic border-solid border-2 border-green-300">
                             As you are planning to buy the house in future, The average cost of house is 
                             <strong> $446919</strong>.
-                            Buying a House in this city is possible according to your details.
+                         
                         </p>
-                        <button onClick={handleSubmitt} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                        <p className="text-gray-700 text-base italic border-solid border-2 border-green-300">
+                            Buying a House in this city is possible according to your details.
+
+                        </p>
+                    
+                        <button onClick={handleSubmitt} class="  mt-px italic bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                             View Rentals Space in this location!
             </button>
           </div>
@@ -73,17 +78,22 @@ export default function Demo() {
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
           
-          <p className="text-gray-700 text-base">
-                                The cost of living in Toronto is <strong>$2500</strong> per month. 
+                            <p className="text-gray-700 italic text-base">
+                                The cost of living in Toronto,Ontario is <strong>$2500</strong> per month. 
           </p>
-          <p className="text-gray-700 text-base">
+                            <p className=" border-solid border-2 border-red-300 text-gray-700 italic  text-red">
                                 The probability of getting job is <strong>50</strong> percentage, as analyzed from the jobs available and applicants.
           </p>
-          <p className="text-gray-700 text-base">
+                            <p className="  border-solid border-2 border-red-300 text-gray-700 italic text-base">
                                 As you are planning to buy the house in future, The average cost of house is <strong>$800k</strong>.
-                                <br/>Buying a house in this city is extremly difficult according to your provided details.
+ 
                             </p>
-                            <button onClick={handleSubmittt} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                            <p className="  border-solid border-2 border-red-300 text-gray-700 italic text-base">
+                                Buying a house in this city is extremly difficult according to your provided details.
+                               
+                            </p>
+                           
+                            <button onClick={handleSubmittt} class="  mt-px italic bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                 View Rentals Space in this location!
                             </button>
         </div>

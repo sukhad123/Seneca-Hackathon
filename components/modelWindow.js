@@ -21,7 +21,10 @@ import React from 'react';
 export default function Model(props) {
   const onClose = props.onClose; // Retrieve onClose from props
   const title = props.title;//get the title
-  const population = props.population;//get the population
+      let population = props.population;//get the population
+    if (population == null) {
+        population =0
+    }
 
   return (
     <>
@@ -29,8 +32,10 @@ export default function Model(props) {
         <div className="modal-content">
           <span className="close" onClick={onClose}>&times;</span>
           
-         <p className = "text-indigo-900">{title}</p>
-         <p className = "text-indigo-900">Population Density: {population}</p>
+                  <p className="text-indigo-900">{title}</p>
+                  {population &&
+                      <p className="text-indigo-900">Population Density: {population}</p>
+                  }
 
         </div>
       </div>

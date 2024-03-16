@@ -10,14 +10,14 @@ export default function RentalInfo(props) {
                     <div className="max-w-sm rounded overflow-hidden shadow-lg">
                         <img className="w-full img" src={item.img} alt="Sunset in the mountains" />
                         <div className="px-6 py-4">
-                            <div className="font-bold text-xl mb-2">{item.title}</div>
+                            <div className="font-bold text-xl mb-2 text-gray-700 ">{item.title}</div>
                             <p className="text-gray-700 text-base">
                                 {item.description}
                             </p>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                 {item.rent}
                             </button>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                 Rent Now
                             </button>
                         </div>
